@@ -28,6 +28,13 @@ public class Fabricante {
         this.id = dados.getId();
     }
 
+    public void atualizarInformacoes(Fabricante dados) {
+        if(dados.getNome() != null){
+            this.nome = dados.getNome();
+        }
+    }
+
+
 //    @OneToMany
 //    private Produto produto;
 }

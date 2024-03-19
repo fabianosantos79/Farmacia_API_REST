@@ -5,6 +5,8 @@ import jakarta.validation.constraints.NotBlank;
 
 public record DadosCadastroProduto(
         @NotBlank
+        Long id,
+        @NotBlank
         String nome,
         @NotBlank
         String descricao,

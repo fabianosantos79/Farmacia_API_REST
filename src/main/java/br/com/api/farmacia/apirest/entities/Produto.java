@@ -27,9 +27,29 @@ public class Produto {
     private Fabricante fabricante;
 
     public Produto(DadosCadastroProduto dados) {
+        this.id = dados.id();
         this.nome = dados.nome();
         this.descricao = dados.descricao();
         this.preco = dados.preco();
         this.fabricante = new Fabricante(dados.fabricante());
+    }
+
+    public void atualizarInformacoes(DadosCadastroProduto dados) {
+        if(dados.nome() != null){
+            this.nome = dados.nome();
+        }
+
+        if(dados.descricao() != null){
+            this.descricao = dados.descricao();
+        }
+
+        if(dados.preco() != null){
+            this.preco = dados.preco();
+        }
+
+        if(dados.fabricante() != null){
+            this.fabricante.atualizarInformacoes(dados.fabricante());
+        }
+
     }
 }

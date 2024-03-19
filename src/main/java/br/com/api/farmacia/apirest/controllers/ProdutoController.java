@@ -3,14 +3,11 @@ package br.com.api.farmacia.apirest.controllers;
 import br.com.api.farmacia.apirest.dtos.DadosCadastroProduto;
 import br.com.api.farmacia.apirest.entities.Produto;
 import br.com.api.farmacia.apirest.repositories.ProdutoRepository;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/produtos")
@@ -29,5 +26,17 @@ public class ProdutoController {
     @GetMapping
     public Page<Produto> listar(Pageable pagination){
         return repository.findAll(pagination);
+    }
+
+//    @GetMapping(value = "/{id}")
+//    public Produto listarPorId(@PathVariable Long id){
+//        return repository.getReferenceById(id);
+//    }
+
+    @PutMapping()
+    @Transactional
+    public void atualizarProduto(@RequestBody DadosCadastroProduto dados){
+        var idSelecionado = repository.getReferenceById(dados.id());
+        idSelecionado.atualizarInformacoes(dados);
     }
 }
