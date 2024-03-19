@@ -1,5 +1,7 @@
 package br.com.api.farmacia.apirest.entities;
 
+import br.com.api.farmacia.apirest.dtos.DadosCadastroFabricante;
+import br.com.api.farmacia.apirest.dtos.DadosCadastroProduto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -21,5 +23,13 @@ public class Produto {
     private String descricao;
     private Double preco;
     @ManyToOne
+    @JoinColumn(name="fabricante_id")
     private Fabricante fabricante;
+
+    public Produto(DadosCadastroProduto dados) {
+        this.nome = dados.nome();
+        this.descricao = dados.descricao();
+        this.preco = dados.preco();
+        this.fabricante = new Fabricante(dados.fabricante());
+    }
 }
