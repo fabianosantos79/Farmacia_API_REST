@@ -28,15 +28,20 @@ public class ProdutoController {
         return repository.findAll(pagination);
     }
 
-//    @GetMapping(value = "/{id}")
-//    public Produto listarPorId(@PathVariable Long id){
-//        return repository.getReferenceById(id);
-//    }
+    @GetMapping(value = "/{id}")
+    public Produto listarPorId(@PathVariable Long id){
+        return repository.getReferenceById(id);
+    }
 
     @PutMapping()
     @Transactional
     public void atualizarProduto(@RequestBody DadosCadastroProduto dados){
         var idSelecionado = repository.getReferenceById(dados.id());
         idSelecionado.atualizarInformacoes(dados);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deletarProduto(@PathVariable Long id){
+        repository.deleteById(id);
     }
 }
