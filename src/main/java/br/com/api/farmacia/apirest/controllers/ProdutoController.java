@@ -5,6 +5,8 @@ import br.com.api.farmacia.apirest.entities.Produto;
 import br.com.api.farmacia.apirest.repositories.ProdutoRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,7 +27,7 @@ public class ProdutoController {
     }
 
     @GetMapping
-    public List<Produto> listar(){
-        return repository.findAll();
+    public Page<Produto> listar(Pageable pagination){
+        return repository.findAll(pagination);
     }
 }
