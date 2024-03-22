@@ -5,6 +5,7 @@ import br.com.api.farmacia.apirest.entities.Fabricante;
 import br.com.api.farmacia.apirest.repositories.FabricanteRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,8 +18,9 @@ public class FabricanteController {
 
     @PostMapping
     @Transactional
-    public void cadastrar(@RequestBody @Valid DadosCadastroFabricante dados){
-        repository.save(new Fabricante(dados));
+    public ResponseEntity cadastrar(@RequestBody @Valid DadosCadastroFabricante dados){
+        var fabricante = repository.save(new Fabricante(dados));
+        return ResponseEntity.ok(fabricante);
 //        System.out.println(dados);
     }
 }
